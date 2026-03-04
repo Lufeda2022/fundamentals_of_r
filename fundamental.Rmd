@@ -1,0 +1,11 @@
+---
+title: "FUNDAMENTALS_OF_R"
+author: "FESTUS_and_REAGAN"
+date: "2026-03-04"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
