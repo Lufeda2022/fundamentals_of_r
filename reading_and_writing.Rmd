@@ -1,0 +1,102 @@
+---
+title: "reading_and_writing_data"
+author: "FESTUS DAVID L."
+date: "2026-03-25"
+output: pdf_document
+---
+
+#Reading and Writing Data in R
+# Learning Objectives
+#By the end of this lesson, 
+#- Understand common data file formats used in data analysis
+#- Read data into R from CSV, TSV, Excel, and RDS files
+#- Write data from R back to disk in different formats
+#- Perform quick checks to verify successful import
+
+# Introduction: Why Data I/O Matters
+#Before any analysis, you must import your data into R. After cleaning or analyzing it, #you often need to export results for sharing, reporting, or further processing.
+#R provides simple, powerful functions for both tasks. This tutorial walks through the #most common ones.
+
+
+#Reading Data into R
+#1 Reading CSV Files
+#CSV (Comma‑Separated Values) is the most common format for data exchange.
+
+#Explanation
+#- header = TRUE tells R the first row contains column names
+#- stringsAsFactors = FALSE prevents automatic conversion of text into factors
+
+```{r}
+data_csv <- read.csv("data_file.csv", 
+                     header = TRUE, 
+                     stringsAsFactors = FALSE)
+```
+
+#Reading TSV Files
+#TSV files use tabs instead of commas.
+# Function: read.delim()
+```{r}
+data_tsv <- read.delim("data_file.tsv", header = TRUE)
+```
+
+#Reading Excel Files
+#Excel files require an external package
+#Explanation
+#- sheet = 1 loads the first sheet
+#- No need for Java or heavy dependencies
+
+```{r}
+library(readxl)
+data_excel <- read_excel("data_file.xlsx", sheet = 1)
+```
+
+#Reading RDS Files
+#RDS files store R objects in a compact format
+#Explanation
+#• 	Preserves object structure (lists, models, data frames)
+#• 	Ideal for saving intermediate results
+```{r}
+data_rds <- readRDS("data_file.rds")
+```
+
+#Fast Reading with data.table::fread()
+#For large datasets, fread() is extremely fast.
+
+```{r}
+library(data.table)
+data_fast <- fread("large_file.csv")
+```
+
+# Writing Data from R to Disk
+# Writing CSV Files
+# Explanation
+#- row.names = FALSE avoids adding an unnecessary first colum
+
+```{r}
+write.csv(data_csv, "output_file.csv", row.names = FALSE)
+```
+
+#wiring TSV files
+```{r}
+write.table(data_tsv, "output_file.tsv", 
+            sep = "\t", 
+            row.names = FALSE, 
+            quote = FALSE)
+```
+
+#wiritng excel files
+```{r}
+library(writexl)
+write_xlsx(data_excel, "output_file.xlsx")
+```
+
+#Writing RDS Files
+```{r}
+saveRDS(data_rds, "output_file.rds")
+```
+
+#Fast Writing with fwrite()
+```{r}
+fwrite(data_fast, "output_fast.csv")
+```
+
